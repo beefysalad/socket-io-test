@@ -6,7 +6,7 @@ const server = http.createServer(app)
 const path = require('path')
 const {Server} = require('socket.io')
 const io = new Server(server)
-console.clear()
+
 
 
 app.set('view engine', 'ejs')
