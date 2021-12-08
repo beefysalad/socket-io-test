@@ -61,6 +61,14 @@
             item.classList.add('list-group-item')
             document.querySelector('.messageBody').appendChild(item)
         })
+        socket.on("is_online",(username)=>{
+            const joinchat = document.createElement('li')
+            joinchat.textContent = username
+            joinchat.classList.add('list-group-item')
+            document.querySelector('.messageBody').appendChild(joinchat)
+        })
+        const username = prompt('Please tell me your username')
+        socket.emit('username',username)
     </script>
 </body>
 </html>

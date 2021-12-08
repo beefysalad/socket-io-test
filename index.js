@@ -21,12 +21,18 @@ app.get('/',(req,res)=>{
 
 io.on("connection",(socket) =>{
     console.log(`user ${socket.id} has conected`)
-    socket.on("disconnect",(socket)=>{
-        console.log(`user ${socket.id} has disconnected`)
+    socket.on('username',(username)=>{
+        socket.username = username;
+        io.emit('is_online', `🔵 ${socket.username} has joined the chat`)
+    })
+    socket.on("disconnect",(username)=>{
+        io.emit('is_online', `🔴 ${socket.username} has left the chat`)
     })
     socket.on("message",(data)=>{
-        io.emit("message",data)
+        io.emit("message",`${socket.username}: ${data}`)
     })
+    
+    
 })
 
 
