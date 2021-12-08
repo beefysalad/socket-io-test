@@ -39,7 +39,13 @@ io.on("connection",(socket) =>{
         // io.emit('is_online', `🔵 ${socket.username} has joined the chat`)
     })
     socket.on("disconnect",(username)=>{
-        io.emit('is_online', `🔴 ${socket.username} has left the chat`)
+        const removeElement = userz.findIndex(i => i.id === socket.id);
+        if(removeElement>-1){
+            userz.splice(removeElement,1);
+        }
+        io.emit('disconnectz',userz)
+        // console.log(userz)
+        // io.emit('is_online', `🔴 ${socket.username} has left the chat`)
     })
     socket.on("message",(data)=>{
         const current = getCurrentUser(socket.id)
