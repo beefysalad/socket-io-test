@@ -34,7 +34,7 @@ io.on("connection",(socket) =>{
     socket.on('username',(username)=>{
         socket.username = username;
         addUser(socket.id,socket.username)
-        io.emit('username',userz)
+        io.emit('username',{users:userz,time:moment().calendar(),current:socket.username})
         // console.log(userz)
         // io.emit('is_online', `🔵 ${socket.username} has joined the chat`)
     })
@@ -43,14 +43,14 @@ io.on("connection",(socket) =>{
         if(removeElement>-1){
             userz.splice(removeElement,1);
         }
-        io.emit('disconnectz',userz)
+        io.emit('disconnectz',{user:userz,current:socket.username,time:moment().calendar()})
         // console.log(userz)
         // io.emit('is_online', `🔴 ${socket.username} has left the chat`)
     })
     socket.on("message",(data)=>{
         const current = getCurrentUser(socket.id)
         
-        io.emit("message",{message:data,name:current.name,time:moment().format('LT')})
+        io.emit("message",{message:data,name:current.name,time:moment().calendar()})
         // console.log(`data is ${data} and username is ${username}`)
     })
     

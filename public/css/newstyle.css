@@ -109,6 +109,7 @@ a {
 
 .chat-messages .message .meta span {
 	color: #777;
+	font-size:13px;
 }
 
 .chat-form-container {

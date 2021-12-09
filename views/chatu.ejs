@@ -78,27 +78,51 @@
         })
         socket.on('username',(username)=>{
           userList.innerHTML = '';
-          username.forEach(element => {
+          username.users.forEach(element => {
             const li = document.createElement('li')
             li.innerText = element.name
             userList.appendChild(li)
           });
-         
+            const div = document.createElement('div')
+            div.classList.add('message')
+            const p = document.createElement('p')
+            p.classList.add('meta')
+            p.innerText = "Salad Bot"
+            p.innerHTML += `<span> ${username.time} </span>`
+            
+            div.appendChild(p)
+            const mes = document.createElement('p')
+            mes.classList.add('text')
+            mes.innerText = `${username.current} has joined the chat`
+            div.appendChild(mes)
+            document.querySelector(".chat-messages").appendChild(div)
+            document.querySelector('.chat-messages').scrollTop = document.querySelector('.chat-messages').scrollHeight
         })
-        socket.on('disconnectz',(username)=>{
-          userList.innerHTML = '';
-          username.forEach(element => {
-            const li = document.createElement('li')
-            li.innerText = element.name
-            userList.appendChild(li)
-          });
-         
+          socket.on('disconnectz',(username)=>{
+            userList.innerHTML = '';
+            username.user.forEach(element => {
+              const li = document.createElement('li')
+              li.innerText = element.name
+              userList.appendChild(li)
+            });
+            const div = document.createElement('div')
+              div.classList.add('message')
+              const p = document.createElement('p')
+              p.classList.add('meta')
+              p.innerText = "Salad Bot"
+              p.innerHTML += `<span> ${username.time} </span>`
+              
+              div.appendChild(p)
+              const mes = document.createElement('p')
+              mes.classList.add('text')
+              mes.innerText = `${username.current} has left the chat`
+              console.log(username.current)
+              div.appendChild(mes)
+              document.querySelector(".chat-messages").appendChild(div)
+              document.querySelector('.chat-messages').scrollTop = document.querySelector('.chat-messages').scrollHeight
         })
         socket.on("message",(data)=>{
-            // const item = document.createElement('li')
-            // item.textContent = data
-            // item.classList.add('list-group-item')
-            // document.querySelector('.messageBody').appendChild(item)
+            
             const div = document.createElement('div')
             div.classList.add('message')
             const p = document.createElement('p')
@@ -121,12 +145,7 @@
           } else {
           }
         });
-        // socket.on("is_online",(username)=>{
-        //     const joinchat = document.createElement('li')
-        //     joinchat.textContent = username
-        //     joinchat.classList.add('list-group-item')
-        //     document.querySelector('.messageBody').appendChild(joinchat)
-        // })
+    
         
     </script>
   
